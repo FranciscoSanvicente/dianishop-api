@@ -91,6 +91,14 @@ export class CreateProductDto {
   inStock?: boolean;
 
   @ApiPropertyOptional({
+    description: "Si el producto es destacado (featured)",
+    example: false,
+  })
+  @IsOptional()
+  @IsBoolean()
+  isFeatured?: boolean;
+
+  @ApiPropertyOptional({
     description: "Cantidad disponible en stock",
     example: 50,
     minimum: 0,

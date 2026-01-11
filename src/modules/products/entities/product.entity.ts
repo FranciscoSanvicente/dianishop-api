@@ -18,6 +18,7 @@ interface ProductCreationAttrs {
   rating?: number;
   reviews?: number;
   inStock?: boolean;
+  isFeatured?: boolean;
   stock?: number;
   sku?: string;
   categoryId: number;
@@ -49,6 +50,9 @@ export class Product extends Model<Product, ProductCreationAttrs> {
 
   @Column({ type: DataType.BOOLEAN, defaultValue: true })
   inStock: boolean;
+
+  @Column({ type: DataType.BOOLEAN, defaultValue: false })
+  isFeatured: boolean;
 
   @Column({ type: DataType.INTEGER, defaultValue: 0 })
   stock: number;

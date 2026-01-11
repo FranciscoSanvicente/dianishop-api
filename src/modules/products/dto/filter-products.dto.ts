@@ -66,6 +66,14 @@ export class FilterProductsDto extends PaginationQueryDto {
   inStock?: boolean;
 
   @ApiPropertyOptional({
+    description: "Filtrar solo productos destacados",
+    example: true,
+  })
+  @IsOptional()
+  @Type(() => Boolean)
+  isFeatured?: boolean;
+
+  @ApiPropertyOptional({
     description: "Campo por el cual ordenar",
     enum: ProductSortBy,
     example: ProductSortBy.CREATED_AT,

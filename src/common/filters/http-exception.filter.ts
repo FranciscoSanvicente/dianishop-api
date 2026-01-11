@@ -4,6 +4,7 @@ import {
   ArgumentsHost,
   HttpException,
   HttpStatus,
+  Logger,
 } from "@nestjs/common";
 import { Request, Response } from "express";
 
@@ -13,6 +14,11 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
     const request = ctx.getRequest<Request>();
+    const logger = new Logger("HttpExceptionFilter");
+
+    if (!(exception instanceof HttpException)) {
+      logger.error(`Error no controlado: ${exception instanceof Error ? exception.stack : exception}`);
+    }
 
     const isHttp = exception instanceof HttpException;
     const status = isHttp

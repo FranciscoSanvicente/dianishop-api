@@ -33,6 +33,7 @@ export interface ProductWithImages {
   rating?: number;
   reviews?: number;
   inStock?: boolean;
+  isFeatured?: boolean;
   stock?: number;
   sku?: string;
   categoryId: number;
@@ -69,6 +70,10 @@ export class ProductsService {
         createProductDto.inStock !== undefined
           ? createProductDto.inStock
           : undefined,
+      isFeatured:
+        createProductDto.isFeatured !== undefined
+          ? createProductDto.isFeatured
+          : undefined,
       stock: createProductDto.stock || undefined,
       sku: createProductDto.sku || undefined,
       categoryId: createProductDto.categoryId,
@@ -104,6 +109,7 @@ export class ProductsService {
       minPrice,
       maxPrice,
       inStock,
+      isFeatured,
       sortBy = ProductSortBy.CREATED_AT,
       sortOrder = SortOrder.DESC,
     } = filterDto;
@@ -131,6 +137,10 @@ export class ProductsService {
 
     if (inStock !== undefined) {
       whereConditions.inStock = inStock;
+    }
+
+    if (isFeatured !== undefined) {
+      whereConditions.isFeatured = isFeatured;
     }
 
     // Calcular offset para paginación
@@ -244,6 +254,10 @@ export class ProductsService {
       inStock:
         updateProductDto.inStock !== undefined
           ? updateProductDto.inStock
+          : undefined,
+      isFeatured:
+        updateProductDto.isFeatured !== undefined
+          ? updateProductDto.isFeatured
           : undefined,
       stock: updateProductDto.stock || undefined,
       sku: updateProductDto.sku || undefined,
